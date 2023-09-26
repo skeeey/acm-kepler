@@ -15,6 +15,10 @@ sudo subscription-manager repos \
 
 sudo dnf install -y microshift openshift-clients
 
+sudo firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16
+sudo firewall-cmd --permanent --zone=trusted --add-source=169.254.169.1
+sudo firewall-cmd --reload
+
 sudo cp .pull-secret.json /etc/crio/openshift-pull-secret
 
 sudo systemctl enable --now microshift.service
