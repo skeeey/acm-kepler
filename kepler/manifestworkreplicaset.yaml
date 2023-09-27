@@ -2,7 +2,7 @@ apiVersion: work.open-cluster-management.io/v1alpha1
 kind: ManifestWorkReplicaSet
 metadata:
   name: kepler-exporter
-  namespace: kepler-exporter
+  namespace: default
 spec:
   placementRefs:
     - name: microshift
@@ -152,7 +152,7 @@ spec:
                 - name: KEPLER_LOG_LEVEL
                   value: "1"
                 image: quay.io/sustainable_computing_io/kepler:release-0.5.3
-                imagePullPolicy: Always
+                imagePullPolicy: IfNotPresent
                 livenessProbe:
                   failureThreshold: 5
                   httpGet:

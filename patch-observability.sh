@@ -63,11 +63,13 @@ oc label ns open-cluster-management-addon-observability security.openshift.io/sc
 
 oc adm policy add-scc-to-user privileged -z node-exporter -n open-cluster-management-addon-observability
 oc adm policy add-scc-to-user privileged -z kube-state-metrics -n open-cluster-management-addon-observability
+oc create namespace kepler
 oc adm policy add-scc-to-user privileged -z kepler -n kepler
 
-kubectl -n open-cluster-management-addon-observability delete pods --all --force --grace-period=0
+oc -n open-cluster-management-addon-observability delete pods --all --force --grace-period=0
 
-sleep 5
+echo "Waiting the pods restart ..."
+sleep 30
 
 oc -n open-cluster-management-addon-observability patch daemonset/node-exporter --patch \
     "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"last-restart\":\"`date +'%s'`\"}}}}}"
@@ -75,3 +77,5 @@ oc -n open-cluster-management-addon-observability patch daemonset/node-exporter 
 oc -n open-cluster-management-addon-observability patch deployment/kube-state-metrics --patch \
     "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"last-restart\":\"`date +'%s'`\"}}}}}"
 
+
+echo "Run \"oc -n open-cluster-management-addon-observability get pods\" to check the observability agent status"

@@ -16,4 +16,4 @@ oc apply -k ${observability_repo}/examples/minio
 oc apply -f ${observability_repo}/operators/multiclusterobservability/config/samples/observability_v1beta2_multiclusterobservability.yaml
 oc apply -f ${CURRENT_DIR}/config/metrics-allowlist.yaml
 
-oc get multiclusterobservability -oyaml
+echo "Run \"oc get multiclusterobservability observability -oyaml\" to check the observability status"

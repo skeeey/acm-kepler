@@ -29,7 +29,21 @@ sudo cat /var/lib/microshift/resources/kubeadmin/kubeconfig > ~/.kube/config
 oc get cs
 ```
 
-## Observability
+## ACM
+
+### Enable the ManifestWorkReplicaSet on the ACM hub
+
+```sh
+oc patch clustermanager cluster-manager --type=merge --patch "{\"spec\":{\"workConfiguration\":{\"featureGates\":[{\"feature\":\"ManifestWorkReplicaSet\",\"mode\":\"Enable\"}]}}}"
+```
+
+### Create a ManagedClusterSet and add the microshift cluster to this cluster set on the ACM hub
+
+```sh
+oc apply -f kepler/clusterset.yaml
+
+oc label managedclusters microshift cluster.open-cluster-management.io/clusterset=microshift --overwrite
+```
 
 ### Enable Observability on the ACM hub
 
@@ -45,28 +59,29 @@ oc get cs
 
 ## Kepler
 
-### Deploy
+### Create ManifestWorkReplicaSet on the ACM hub to deploy Kepler
 
 ```sh
-kubectl apply -k manifests
+oc apply -k kepler
+
+# check the kepler is deployed on the microshift
+oc get manifestworkreplicasets.work.open-cluster-management.io -w
 ```
 
 ### Verify
 
 ```sh
-# http://10.0.118.47:8000/metrics
-oc port-forward --address 127.0.0.1,10.0.118.47 -n kepler svc/kepler-exporter 8000:9102
+# make sure the kepler metrics are collected by observability
+oc -n open-cluster-management-addon-observability exec prometheus-k8s-0 -- curl -v "http://127.0.0.1:9090/api/v1/query?query=kepler_container_package_joules_total"
 
-kubectl -n open-cluster-management-addon-observability exec prometheus-k8s-0 -- curl -v "http://127.0.0.1:9090/api/v1/query?query=kepler_container_package_joules_total"
-kubectl -n open-cluster-management-addon-observability exec prometheus-k8s-0 -- curl -v "http://127.0.0.1:9090/api/v1/query?query=kepler_container_dram_joules_total"
-kubectl -n open-cluster-management-addon-observability exec prometheus-k8s-0 -- curl -v "http://127.0.0.1:9090/api/v1/query?query=kepler_container_gpu_joules_total"
-kubectl -n open-cluster-management-addon-observability exec prometheus-k8s-0 -- curl -v "http://127.0.0.1:9090/api/v1/query?query=kepler_container_other_joules_total"
+# make sure the kepler metrics are listed in the observability allow list
+oc -n open-cluster-management-addon-observability get cm observability-metrics-allowlist -oyaml
 ```
 
 ### Dashboard
 
-1. Following the [ACM doc](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.8/html/observability/using-grafana-dashboards#setting-up-the-grafana-developer-instance) to create a grafana-dev instance.
-2. Log in to the grafana-dev.
+1. Following the [ACM doc](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.8/html/observability/using-grafana-dashboards#setting-up-the-grafana-developer-instance) to create a grafana-dev instance
+2. Log in to the grafana-dev
 3. Import the `dashboard/acm-kepler-exporter.json`
 
 ### Metrics

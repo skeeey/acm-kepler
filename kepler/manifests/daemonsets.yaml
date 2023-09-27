@@ -53,7 +53,7 @@ spec:
         - name: KEPLER_LOG_LEVEL
           value: "1"
         image: quay.io/sustainable_computing_io/kepler:release-0.5.3
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 5
           httpGet:
