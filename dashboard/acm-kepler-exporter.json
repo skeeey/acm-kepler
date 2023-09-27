@@ -279,7 +279,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_package_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[5m]))",
+          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_package_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[10m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod_name}} / {{container_namespace}} / PKG",
@@ -289,7 +289,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_dram_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[5m]))",
+          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_dram_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[10m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod_name}} / {{container_namespace}} / DRAM",
@@ -299,7 +299,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_other_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[5m]))",
+          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_other_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[10m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod_name}} / {{container_namespace}} / OTHER",
@@ -309,7 +309,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_gpu_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[5m]))",
+          "expr": "sum by (pod_name, container_namespace) (irate(kepler_container_gpu_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\",pod_name=~\"$pod\"}[10m]))",
           "hide": false,
           "legendFormat": "{{pod_name}} / {{container_namespace}} / GPU",
           "range": true,
@@ -459,7 +459,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum(irate(kepler_container_package_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(kepler_container_package_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[10m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "PKG",
@@ -469,7 +469,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum(irate(kepler_container_dram_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(kepler_container_dram_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[10m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "DRAM",
@@ -479,7 +479,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum(irate(kepler_container_other_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(kepler_container_other_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[10m]))",
           "hide": false,
           "legendFormat": "OTHER",
           "range": true,
@@ -488,7 +488,7 @@
         {
           "datasource": "$datasource",
           "editorMode": "code",
-          "expr": "sum(irate(kepler_container_gpu_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(kepler_container_gpu_joules_total{cluster=\"$cluster\",container_namespace=~\"$namespace\"}[10m]))",
           "hide": false,
           "legendFormat": " GPU",
           "range": true,
