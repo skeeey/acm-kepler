@@ -42,7 +42,7 @@ oc patch clustermanager cluster-manager --type=merge --patch "{\"spec\":{\"workC
 ```sh
 oc apply -f kepler/clusterset.yaml
 
-oc label managedclusters microshift cluster.open-cluster-management.io/clusterset=microshift --overwrite
+oc label managedclusters {cluster name} cluster.open-cluster-management.io/clusterset=microshift --overwrite
 ```
 
 ### Enable Observability on the ACM hub

@@ -1,11 +1,4 @@
 # Grafana Dashboard
-This directory stores pre-generated Grafana dashboard. Due to data format changes, dashboards used prior to PR #112 are in [legacy](./legacy) directory.
 
-# Customerize Dashboard
-The metrics used by Pod are:
-```
-kepler_container_package_joules_total{}
-kepler_container_dram_joules_total{}
-kepler_container_gpu_joules_total{}
-kepler_container_other_joules_total{}
-```
+- The `acm-kepler-exporter.json` dashboard is based on [kepler repo dashboard](https://github.com/sustainable-computing-io/kepler/tree/main/grafana-dashboards)
+- The `acm-kepler-operator-exporter.json` dashboard is based on [kepler operator repo dashboard](https://github.com/sustainable-computing-io/kepler-operator/tree/v1alpha1/hack/dashboard/assets/kepler)

@@ -7,6 +7,8 @@ metadata:
     sustainable-computing.io/app: kepler
   name: kepler-exporter
   namespace: open-cluster-management-addon-observability
+  # for ocp
+  #namespace: openshift-monitoring
 spec:
   endpoints:
   - interval: 3s

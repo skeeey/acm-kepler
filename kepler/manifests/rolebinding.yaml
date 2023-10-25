@@ -16,3 +16,6 @@ subjects:
 - kind: ServiceAccount
   name: prometheus-k8s
   namespace: open-cluster-management-addon-observability
+- kind: ServiceAccount
+  name: prometheus-k8s
+  namespace: openshift-monitoring
