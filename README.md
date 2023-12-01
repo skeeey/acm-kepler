@@ -1,5 +1,7 @@
 # acm-kepler
 
+Move to https://github.com/stolostron/edge-innovation/tree/main/kepler-acm
+
 Enable Kepler in ACM with Observability
 
 ## MicroShift
